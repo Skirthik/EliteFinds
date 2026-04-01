@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EliteFinds</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body { margin:0; font-family:'Poppins'; background:#f5f5f5; }
+
+/* NAVBAR */
+.navbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  background-color: #0d0d0d;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='80'%3E%3C!-- left ornament --%3E%3Cpolygon points='18,10 26,20 18,30 10,20' fill='none' stroke='%23ffd700' stroke-opacity='0.25' stroke-width='1'/%3E%3Cpolygon points='18,14 24,20 18,26 12,20' fill='%23ffd700' fill-opacity='0.07'/%3E%3Ccircle cx='18' cy='20' r='2' fill='%23ffd700' fill-opacity='0.35'/%3E%3C!-- sparkle left --%3E%3Cpath d='M38 15 L39 18 L42 19 L39 20 L38 23 L37 20 L34 19 L37 18 Z' fill='%23ffd700' fill-opacity='0.3'/%3E%3C!-- center top gem --%3E%3Cpolygon points='100,4 108,14 100,22 92,14' fill='none' stroke='%23ffd700' stroke-opacity='0.2' stroke-width='1'/%3E%3Cpolygon points='100,7 106,14 100,19 94,14' fill='%23ffd700' fill-opacity='0.06'/%3E%3Ccircle cx='100' cy='14' r='2.5' fill='%23ffd700' fill-opacity='0.28'/%3E%3C!-- sparkle center --%3E%3Cpath d='M120 30 L121 33 L124 34 L121 35 L120 38 L119 35 L116 34 L119 33 Z' fill='%23c8a040' fill-opacity='0.25'/%3E%3C!-- right ornament --%3E%3Cpolygon points='178,10 186,20 178,30 170,20' fill='none' stroke='%23ffd700' stroke-opacity='0.25' stroke-width='1'/%3E%3Cpolygon points='178,14 184,20 178,26 172,20' fill='%23ffd700' fill-opacity='0.07'/%3E%3Ccircle cx='178' cy='20' r='2' fill='%23ffd700' fill-opacity='0.35'/%3E%3C!-- sparkle right --%3E%3Cpath d='M155 12 L156 15 L159 16 L156 17 L155 20 L154 17 L151 16 L154 15 Z' fill='%23ffd700' fill-opacity='0.28'/%3E%3C!-- ring bottom left --%3E%3Ccircle cx='60' cy='62' r='9' fill='none' stroke='%23ffd700' stroke-opacity='0.13' stroke-width='1.5'/%3E%3Ccircle cx='60' cy='62' r='5' fill='none' stroke='%23ffd700' stroke-opacity='0.08' stroke-width='1'/%3E%3C!-- ring bottom right --%3E%3Ccircle cx='148' cy='58' r='9' fill='none' stroke='%23ffd700' stroke-opacity='0.13' stroke-width='1.5'/%3E%3Ccircle cx='148' cy='58' r='5' fill='none' stroke='%23ffd700' stroke-opacity='0.08' stroke-width='1'/%3E%3C!-- tiny dots scattered --%3E%3Ccircle cx='50' cy='20' r='1.2' fill='%23ffd700' fill-opacity='0.2'/%3E%3Ccircle cx='75' cy='45' r='1' fill='%23ffd700' fill-opacity='0.18'/%3E%3Ccircle cx='135' cy='50' r='1.2' fill='%23ffd700' fill-opacity='0.2'/%3E%3Ccircle cx='165' cy='35' r='1' fill='%23c8a040' fill-opacity='0.22'/%3E%3Ccircle cx='30' cy='50' r='1' fill='%23ffd700' fill-opacity='0.15'/%3E%3Ccircle cx='190' cy='45' r='1.2' fill='%23ffd700' fill-opacity='0.18'/%3E%3C!-- horizontal ornament lines --%3E%3Cline x1='0' y1='75' x2='200' y2='75' stroke='%23ffd700' stroke-opacity='0.08' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 200px 80px;
+  background-repeat: repeat-x;
+  color:white;
+  position: relative;
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #ffd700 20%, #ffd700 80%, transparent);
+  opacity: 0.4;
+}
+
+.nav-links { display:flex; gap:30px; }
+.nav-links span { cursor:pointer; }
+.nav-links span:hover { color:gold; }
+
+.search-box input {
+  padding:6px;
+  border-radius:5px;
+  border:none;
+}
+
+/* HERO */
+.hero {
+  text-align:center;
+  padding:40px;
+  background:linear-gradient(to right,#000,#444);
+  color:white;
+}
+
+/* CATEGORIES */
+.categories {
+  display:flex;
+  gap:12px;
+  padding:15px;
+  overflow-x:auto;
+}
+
+.category {
+  background:white;
+  padding:8px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+/* PRODUCTS */
+.products { padding:25px; }
+
+/* PERFECT GRID */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+}
+
+/* CARD FIXED HEIGHT */
+.card {
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  height:100%;
+}
+
+/* SAME IMAGE SIZE */
+.card img {
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+/* TEXT SPACING */
+.card h3 {
+  margin:10px 0 5px;
+  font-size:16px;
+}
+
+.card p {
+  margin:3px 0;
+}
+
+/* BUTTONS */
+.btn-group {
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.btn-group button {
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.add { background:black; color:white; }
+.wish { background:#ff4d6d; color:white; }
+
+/* FOOTER */
+.footer {
+  background-color: #0d0d0d;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='120'%3E%3C!-- large diamond left --%3E%3Cpolygon points='30,10 46,28 30,46 14,28' fill='none' stroke='%23ffd700' stroke-opacity='0.2' stroke-width='1.2'/%3E%3Cpolygon points='30,16 42,28 30,40 18,28' fill='none' stroke='%23ffd700' stroke-opacity='0.1' stroke-width='0.8'/%3E%3Ccircle cx='30' cy='28' r='3' fill='%23ffd700' fill-opacity='0.3'/%3E%3C!-- facet lines on left diamond --%3E%3Cline x1='30' y1='10' x2='30' y2='46' stroke='%23ffd700' stroke-opacity='0.08' stroke-width='0.6'/%3E%3Cline x1='14' y1='28' x2='46' y2='28' stroke='%23ffd700' stroke-opacity='0.08' stroke-width='0.6'/%3E%3C!-- necklace arc center-top --%3E%3Cpath d='M110 5 Q150 35 190 5' fill='none' stroke='%23ffd700' stroke-opacity='0.18' stroke-width='1.2'/%3E%3Ccircle cx='150' cy='32' r='6' fill='none' stroke='%23ffd700' stroke-opacity='0.22' stroke-width='1.2'/%3E%3Ccircle cx='150' cy='32' r='3' fill='%23ffd700' fill-opacity='0.15'/%3E%3C!-- necklace chain dots --%3E%3Ccircle cx='120' cy='14' r='2' fill='%23ffd700' fill-opacity='0.2'/%3E%3Ccircle cx='134' cy='23' r='2' fill='%23ffd700' fill-opacity='0.18'/%3E%3Ccircle cx='166' cy='23' r='2' fill='%23ffd700' fill-opacity='0.18'/%3E%3Ccircle cx='180' cy='14' r='2' fill='%23ffd700' fill-opacity='0.2'/%3E%3C!-- large diamond right --%3E%3Cpolygon points='270,10 286,28 270,46 254,28' fill='none' stroke='%23ffd700' stroke-opacity='0.2' stroke-width='1.2'/%3E%3Cpolygon points='270,16 282,28 270,40 258,28' fill='none' stroke='%23ffd700' stroke-opacity='0.1' stroke-width='0.8'/%3E%3Ccircle cx='270' cy='28' r='3' fill='%23ffd700' fill-opacity='0.3'/%3E%3Cline x1='270' y1='10' x2='270' y2='46' stroke='%23ffd700' stroke-opacity='0.08' stroke-width='0.6'/%3E%3Cline x1='254' y1='28' x2='286' y2='28' stroke='%23ffd700' stroke-opacity='0.08' stroke-width='0.6'/%3E%3C!-- sparkle stars --%3E%3Cpath d='M70 20 L71.4 24.2 L75.6 25.6 L71.4 27 L70 31.2 L68.6 27 L64.4 25.6 L68.6 24.2 Z' fill='%23ffd700' fill-opacity='0.22'/%3E%3Cpath d='M230 18 L231.2 21.6 L234.8 22.8 L231.2 24 L230 27.6 L228.8 24 L225.2 22.8 L228.8 21.6 Z' fill='%23c8a040' fill-opacity='0.25'/%3E%3C!-- ring bottom center --%3E%3Ccircle cx='150' cy='95' r='12' fill='none' stroke='%23ffd700' stroke-opacity='0.12' stroke-width='1.8'/%3E%3Ccircle cx='150' cy='95' r='7' fill='none' stroke='%23ffd700' stroke-opacity='0.07' stroke-width='1'/%3E%3C!-- small ornament gems --%3E%3Cpolygon points='90,70 96,78 90,86 84,78' fill='none' stroke='%23ffd700' stroke-opacity='0.14' stroke-width='0.8'/%3E%3Cpolygon points='210,72 216,80 210,88 204,80' fill='none' stroke='%23ffd700' stroke-opacity='0.14' stroke-width='0.8'/%3E%3C!-- scattered dots --%3E%3Ccircle cx='55' cy='60' r='1.5' fill='%23ffd700' fill-opacity='0.2'/%3E%3Ccircle cx='105' cy='90' r='1.2' fill='%23ffd700' fill-opacity='0.18'/%3E%3Ccircle cx='200' cy='85' r='1.5' fill='%23ffd700' fill-opacity='0.2'/%3E%3Ccircle cx='245' cy='65' r='1.2' fill='%23c8a040' fill-opacity='0.22'/%3E%3Ccircle cx='15' cy='80' r='1' fill='%23ffd700' fill-opacity='0.18'/%3E%3Ccircle cx='290' cy='75' r='1' fill='%23ffd700' fill-opacity='0.18'/%3E%3C!-- top border line --%3E%3Cline x1='0' y1='2' x2='300' y2='2' stroke='%23ffd700' stroke-opacity='0.15' stroke-width='0.6'/%3E%3C/svg%3E");
+  background-size: 300px 120px;
+  background-repeat: repeat-x;
+  background-position: top center;
+  color:white;
+  padding:30px;
+  margin-top:40px;
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #ffd700 20%, #ffd700 80%, transparent);
+  opacity: 0.4;
+}
+
+.footer-info {
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
+.footer p { color:#ccc; }
+
+/* PAY BUTTON */
+.pay-fixed {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:15px;
+  background:green;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* ===== ORDER CONFIRMATION PAGE ===== */
+.order-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.order-confirm-container {
+  max-width: 600px;
+  margin: 60px auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.order-confirm-header {
+  background: linear-gradient(135deg, #000, #333);
+  color: white;
+  text-align: center;
+  padding: 40px 30px 30px;
+}
+
+.order-confirm-header .checkmark {
+  width: 70px;
+  height: 70px;
+  background: gold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 32px;
+}
+
+.order-confirm-header h2 {
+  margin: 0 0 6px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.order-confirm-header p {
+  margin: 0;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.order-id-badge {
+  display: inline-block;
+  background: rgba(255,215,0,0.15);
+  border: 1px solid gold;
+  color: gold;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-top: 12px;
+  letter-spacing: 1px;
+}
+
+.order-confirm-body {
+  padding: 28px 30px;
+}
+
+.order-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 12px;
+}
+
+.order-items-list {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.order-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-item-row:last-child { border-bottom: none; }
+
+.order-item-row img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.order-item-info {
+  flex: 1;
+}
+
+.order-item-info .item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 2px;
+}
+
+.order-item-info .item-cat {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+.order-item-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+}
+
+.order-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 14px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  margin-bottom: 24px;
+}
+
+.order-total-row .label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+}
+
+.order-total-row .amount {
+  font-size: 18px;
+  font-weight: 600;
+  color: #000;
+}
+
+.order-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.order-info-card {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.order-info-card .info-label {
+  font-size: 11px;
+  color: #999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0 0 4px;
+}
+
+.order-info-card .info-value {
+  font-size: 13px;
+  color: #222;
+  font-weight: 600;
+  margin: 0;
+}
+
+.order-track-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  margin-bottom: 28px;
+  padding: 0 4px;
+}
+
+.order-track-steps::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: #eee;
+  z-index: 0;
+}
+
+.track-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 1;
+  flex: 1;
+}
+
+.track-step .step-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  border: 2px solid #eee;
+  background: white;
+}
+
+.track-step.active .step-dot {
+  background: black;
+  border-color: black;
+  color: white;
+}
+
+.track-step.done .step-dot {
+  background: #22c55e;
+  border-color: #22c55e;
+  color: white;
+}
+
+.track-step .step-label {
+  font-size: 11px;
+  color: #888;
+  text-align: center;
+  font-weight: 500;
+}
+
+.track-step.active .step-label,
+.track-step.done .step-label {
+  color: #222;
+  font-weight: 600;
+}
+
+.order-back-btn {
+  width: 100%;
+  padding: 14px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: background 0.2s;
+}
+
+.order-back-btn:hover { background: #333; }
+
+/* ===== CHATBOT STYLES ===== */
+#chat-bot-icon {
+  position: fixed;
+  bottom: 90px;
+  right: 22px;
+  width: 54px;
+  height: 54px;
+  background: linear-gradient(135deg, #1a1a1a, #444);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  z-index: 9999;
+  border: 2px solid gold;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: pulse-ring 2.5s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(255,215,0,0.4), 0 4px 18px rgba(0,0,0,0.35); }
+  70% { box-shadow: 0 0 0 10px rgba(255,215,0,0), 0 4px 18px rgba(0,0,0,0.35); }
+  100% { box-shadow: 0 0 0 0 rgba(255,215,0,0), 0 4px 18px rgba(0,0,0,0.35); }
+}
+
+#chat-bot-icon:hover {
+  transform: scale(1.1);
+}
+
+#chat-window {
+  position: fixed;
+  bottom: 158px;
+  right: 22px;
+  width: 350px;
+  max-height: 500px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.22);
+  display: none;
+  flex-direction: column;
+  z-index: 9999;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  font-family: 'Poppins', sans-serif;
+  transform: scale(0.92) translateY(10px);
+  opacity: 0;
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+#chat-window.open {
+  display: flex;
+  transform: scale(1) translateY(0);
+  opacity: 1;
+}
+
+#chat-header {
+  background: linear-gradient(135deg, #1a1a1a, #444);
+  color: white;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-avatar {
+  width: 34px;
+  height: 34px;
+  background: gold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.chat-header-info .chat-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.chat-header-info .chat-status {
+  font-size: 11px;
+  color: #a0ff9a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chat-header-info .chat-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #a0ff9a;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+#chat-close {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  padding: 0;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+#chat-close:hover { opacity: 1; }
+
+#chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f7f7f7;
+}
+
+#chat-messages::-webkit-scrollbar { width: 4px; }
+#chat-messages::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+
+.chat-msg {
+  max-width: 84%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+  animation: msgIn 0.18s ease;
+}
+
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-msg.bot {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+  color: #222;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.chat-msg.user {
+  background: linear-gradient(135deg, #1a1a1a, #444);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg.typing {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  align-self: flex-start;
+  padding: 12px 16px;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  height: 14px;
+}
+
+.typing-dots span {
+  width: 6px;
+  height: 6px;
+  background: #bbb;
+  border-radius: 50%;
+  animation: typingBounce 1.2s infinite;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-5px); }
+}
+
+.chat-quick-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.chat-quick-btn {
+  background: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.chat-quick-btn:hover {
+  background: #e8e8e8;
+  border-color: #bbb;
+}
+
+#chat-input-area {
+  display: flex;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid #ececec;
+  background: #fff;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 9px 14px;
+  border: 1px solid #ddd;
+  border-radius: 22px;
+  font-size: 13px;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  transition: border 0.2s;
+  background: #f9f9f9;
+}
+
+#chat-input:focus {
+  border-color: #888;
+  background: #fff;
+}
+
+#chat-send {
+  background: linear-gradient(135deg, #1a1a1a, #444);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+#chat-send:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+</style>
+
+</head>
+<body>
+
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+
+const { useState } = React;
+const categories = ["All","Gold","Diamond","Silver","Bridal","Platinum","Pearl","Gemstone","Modern","Traditional","Luxury","Ethnic","Minimal"]; 
+const products = [
+  { name: "Indian Gold Necklace", category: "Gold", price: 25000, image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTKMBBMRrpms32e9IW5lbkTygXA4c1SO3EQM8PyCyDEuVQ2TmlPd6VjMLX-42d8BbymcnuEzB0jsCKCFR8KftGEdR8eC6yG" },
+  { name: "American Diamond Ring", category: "Diamond", price: 50000, image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcTR5Ym-nru6GRhvsk2WEY5YXCHPLB43Wfr7lWQ2b6tnDYwr5q8O7u4a8k5JHMKf-JYXV3ZFiqF_DlDtyAjdgSQJ4TFfd-1jWpYIVMzo2bxKCAV57dAjrxHuuL0" },
+  { name: "Oxidized Indian Earrings", category: "Traditional", price: 3500, image: "https://jaihoindiastore.com/cdn/shop/files/6_fc9d62ed-5665-49fa-930c-58be4f7d3880.jpg?v=1713506522&width=1920" },
+  { name: "Oxidized Jhumka Set", category: "Traditional", price: 5000, image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSCrdEGfxCK3h3oYuJkTYhQqyZqKmP0aJbqH8jxW74zoYYGvdt3QHNDJlOPe2Il8fWtG-zJCTbQSRtejKuxDEmEw82bTXTIgmh84gFMjD0" },
+  { name: "Indian Meenakari Jhumka Earrings", category: "Ethnic", price: 3500, image:"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ_VSRnkED2k_d-ZVLvw-1bY8_KWWauOVza8HGBUphc6l9MbZaySoZprmhDiJp2nYoF72tDE8RJeIj3w_iqd2V5b9RPKbxD1w" },
+  { name: "Indian Oxidized Tribal Necklace Set", category: "Ethnic", price: 4200, image: "https://m.media-amazon.com/images/I/61HkChQuxEL.jpg" },
+  { name: "Indian Chandbali Festival Earrings", category: "Ethnic", price: 3000, image: "https://karatcart.com/cdn/shop/products/33014710_1.jpg?v=1634992235" },
+  { name: "Indian Navratri Mirror Work Necklace", category: "Ethnic", price: 2800, image: "https://assets0.mirraw.com/images/11910171/MC159OX_(1)_zoom.JPG?1696339509" },
+  { name: "Japanese Minimal Bar Necklace", category: "Minimal", price: 6000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZFM0QoMT_t8QZgu416cb4FbZ8krwMcU1rKA&s" },
+  { name: "Japanese Thin Silver Stack Ring", category: "Minimal", price: 3500, image: "https://static.platform.michaels.com/2c-prd/en_US/338881123843920.jpg?fit=inside|1080:1080" },
+  { name: "Pakistani Kundan Ethnic Set", category: "Ethnic", price: 6000, image: "https://naaribhav.com/cdn/shop/files/DB86939A-6B12-4285-A6DF-CDCDE2BE1357_600x600.jpg?v=1742365875" },
+  { name: "Pakistani Bridal Jhumar Headpiece", category: "Ethnic", price: 5500, image: "https://i.etsystatic.com/29408819/r/il/9e3bac/4980595208/il_fullxfull.4980595208_8e5h.jpg" },
+  { name: "Indian Anklet Pair", category: "Traditional", price: 4000, image: "https://blingqueen.in/cdn/shop/files/BQ_F_INJL24080733552_3481398.jpg?v=1768015811" },
+  { name: "Temple Gold Lakshmi Pendant set", category: "Gold", price: 18000, image: "https://m.media-amazon.com/images/I/81gparoAizL._AC_UY1100_.jpg" },
+  { name: "Gold Kundan Necklace Set", category: "Gold", price: 60000, image: "https://img.perniaspopupshop.com/catalog/product/z/b/ZBGT0623392_1.jpg?impolicy=detailimageprod" },
+  { name: "Gold Maharani Earrings", category: "Gold", price: 15000, image: "https://jewelemarket.com/cdn/shop/files/12931202PK_9c02d8a7-54f2-4d62-b373-df4d01b7b9b0.jpg?v=1751631075" },
+  { name: "Sleek Cuff Bracelet", category: "Modern", price: 7500, image: "https://thumbs.dreamstime.com/b/elegant-silver-cuff-bracelet-modern-design-sleek-contemporary-featuring-simple-flat-rounded-edges-open-ended-435357541.jpg" },
+  { name: "Bangladeshi Gold Plated Ethnic Necklace", category: "Ethnic", price: 4800, image: "https://content.jdmagicbox.com/quickquotes/images_main/antique-gold-mangalsutra-set-for-special-occasions-801914018-101n33gy.jpg?impolicy=queryparam&im=Resize=(360,360),aspect=fit" },
+  { name: "Bangladeshi Traditional Nose Ring", category: "Ethnic", price: 1500, image: "https://www.brishni.com/cdn/shop/products/traditional-nose-ring-for-bengali-bride-nath-915360.jpg?v=1630351563" },
+  { name: "French Haute Couture Diamond Choker", category: "Luxury", price: 250000, image: "https://krishnajewellers.com/cdn/shop/files/18KDiamondchoker.png?crop=center&height=1200&v=1767871987&width=1200" },
+  { name: "French Royal Pearl Bracelet", category: "Luxury", price: 160000, image: "https://chandranipearls.in/cdn/shop/files/B01716.jpg?v=1760720574" },
+  { name: "Australian Simple Opal Pendant", category: "Minimal", price: 12000, image: "https://i0.wp.com/australstones.com.au/wp-content/uploads/2025/10/IMG_9674.jpg?fit=3857%2C3857&ssl=1" },
+  { name: "Australian Clean Gold Ring Band", category: "Minimal", price: 8500, image: "https://temple-and-grace.mo.cloudinary.net/mdopt/images/prod-small/small-1-15461-yellow-gold-124.jpg" },
+  { name: "Canadian Minimal Silver Leaf Pendant", category: "Minimal", price: 6000, image: "https://www.madeincanadagifts.ca/cdn/shop/files/mapleleafnecklace.png?v=1720812495" },
+  { name: "Canadian Simple Chain Bracelet", category: "Minimal", price: 5500, image: "https://simpleanddainty.com/cdn/shop/files/daintylacechainssnew_1400x.jpg?v=1764282378" },
+  { name: "Italian Designer Gold Statement Necklace", category: "Luxury", price: 190000, image: "https://mychungath.com/cdn/shop/files/4_dfbb11db-d72d-45a2-ad14-2138c4cd1d3a.jpg?v=1698214006" },
+  { name: "Korean Minimal Circle Pendant", category: "Minimal", price: 4000, image: "https://5.imimg.com/data5/SELLER/Default/2026/1/574200319/RN/MM/NG/251051597/ampn119gry-2-500x500.jpg" },
+  { name: "Korean Slim Chain Necklace", category: "Minimal", price: 4200, image: "https://cdn.bradojewellery.com/p/1440x/1727256187506.jpeg" },
+  { name: "Italian Luxury Diamond Drop Earrings", category: "Luxury", price: 175000, image: "https://india.zendiamond.com/cdn/shop/files/M24003ER.0R33BC.webp?v=1764916297&width=1200" },
+  { name: "Contemporary Oval Ring", category: "Modern", price: 4300, image: "https://www.mcguirediamonds.ie/cdn/shop/files/1ct-oval-solitaire-lab-grown-diamond-slim-band-engagement-ring-white-gold_600x.jpg?v=1686925591" },
+  { name: "Modern Double Line Necklace", category: "Modern", price: 8200, image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRokkv6iBBEF5pN_1nQXyMDaVsxC1iPsHY0mQzpgqaSwC3KlsGf71tZMBWCxow02xjkYzC8EvM-P4iQYwOypKRkyGn4Iq2zv_jnvZEy92ZfNgvjbUEN1ezZIDXWSTtN_mkQnV9Usm0hbQ&usqp=CAc" },
+  { name: "Contemporary Stud Earrings", category: "Modern", price: 2900, image: "https://www.miabytanishq.com/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dwdbf6c26e/images/Mia/hi-res/3824SJT.jpg?sw=640&sh=640" },
+  { name: "Gold Bangles Pair", category: "Gold", price: 22000, image: "https://cdn.eternz.com/thumbnails/products/1_5cde8629_thumbnail_1024.jpg" },
+  { name: "Italian Silver Chain", category: "Silver", price: 8000, image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRHxFhf0CR5Xd3SziNnQI7E-sNlprjhOKVpBUMjaOJ7lv5iOgHNK1YlBsGa51dc7ImzrFK9ziDm84JIrOP8tCXzFlXZhKv4zA" },
+  { name: "Arabic Bridal Set", category: "Bridal", price: 70000, image: "https://manubhai.in/SocialMedia/post_artworks/2307202011095566.jpg" },
+  { name: "American Sleek Gold Band Ring", category: "Minimal", price: 8500, image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQWqvFY-Zoo6OFXKqoWiZ8PkafhYeXQ2ck4KrxnhfA5JqmuR0Is5IFSpZfFF7aimDUdKkPiw6ZfTaqMNgV24g4jajLgRE3nQPBjevmafoQgPx7YxxgmlgRfQzoeBXHhk5V1vogrUE5J&usqp=CAc" },
+  { name: "American Minimal Diamond Stud Earrings", category: "Minimal", price: 12000, image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSsj0JyfoGzql4C5EFgm92Bd8BENx10O8UIZ0S8AMhsTZQMvmh5wUVat1p0-0CfKjfpNDVqrF64SKvmcX8-xgHLaMZrE3qu2vjCqgGtu8wC2JLLwTy1kNbXzXMaGkpWtEq3vuQwxRV2&usqp=CAc" },
+  { name: "American Diamond Prestige Necklace", category: "Luxury", price: 180000, image: "https://img.perniaspopupshop.com/catalog/product/a/m/AMRJ022469_2.jpg" },
+  { name: "American Platinum Luxe Ring", category: "Luxury", price: 210000, image: "https://www.miabytanishq.com/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dwc3c7f6e2/images/hi-res/742013FBZAA04.jpg?sw=640&sh=640" },
+  { name: "Minimal Loop Pendant", category: "Modern", price: 6200, image: "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRVsERgg5SFiUHG2ecG3kX4ekGS_Z2vx6AGHghFq75tfakEJPFGpqpJ2RasohAQq5z3dfWzvS2rkqKOBFMPeJsiBiz5lk5ehhuPqtaFDRc1BAqoak9T6-PXviodDbU6htZeVwUJRA&usqp=CAc" },
+  { name: "Elegant Modern Bangle", category: "Modern", price: 9800, image: "https://www.sasitrends.com/cdn/shop/files/2382B-elegant-one-gram-micro-gold-plated-bangles-set-sasitrends-online-shopping.jpg?v=1748255104" },
+  { name: "Indian Maharani Gold Bridal Set", category: "Luxury", price: 300000, image: "https://radhejewellery.in/cdn/shop/files/RJBR-38_2_grande.jpg?v=1695744886" },
+  { name: "Indian Polki Royal Choker", category: "Luxury", price: 220000, image: "https://thealchemystudio.co.in/cdn/shop/files/B60.jpg?v=1750850915&width=2048" },
+  { name: "Dubai Gold Luxury Necklace", category: "Luxury", price: 280000, image: "https://i.etsystatic.com/18289922/r/il/cbb859/5599101003/il_570xN.5599101003_54d7.jpg" },
+  { name: "Arabic Diamond Bridal Earrings", category: "Luxury", price: 190000, image: "https://www.chidambaramgoldcovering.com/image/cache/catalog/ChidambaramGoldCovering/earrings/er4066-shop-arabic-bridal-gold-danglers-imitation-jewelry-design-online-1-425x500.jpg" },
+  { name: "Japanese Minimal Platinum Necklace", category: "Luxury", price: 140000, image: "https://www.jewelove.in/cdn/shop/files/jewelove-japanese-platinum-necklace-for-women-jl-pt-ch-199-37450861707505_1024x.jpg?v=1682593926" },
+  { name: "Japanese Zen Diamond Ring", category: "Luxury", price: 160000, image: "https://us.zendiamond.com/cdn/shop/files/zen-diamond-halbmemoire-diamantringe-3001792450-RG073139-15-114-1732090437-2.jpg?v=1760470143&width=1000" },
+  { name: "German Precision Silver Bar Bracelet", category: "Minimal", price: 7000, image: "https://www.parman.in/cdn/shop/files/Titan_Torquwe_1_grande.webp?v=1772692137" },
+  { name: "German Clean Line Pendant Necklace", category: "Minimal", price: 6500, image: "https://deardarling.berlin/cdn/shop/files/Zarte-Halskette-mit-Staebchen_Silber_1_2048x.jpg?v=1684929121" },
+  { name: "Contemporary Chain Bracelet", category: "Modern", price: 6900, image: "https://5.imimg.com/data5/ECOM/Default/2024/9/448604931/CV/PY/EM/195789113/925-sterling-silver-sparkling-mens-braceletbracelet-475677-500x500.jpg" },
+  { name: "14K Gold Diamond Necklace", category: "Gold", price: 85000, image: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQHa7AlfjNfmc06zO-n-qBQHTVzo5W8myTqrsONfhUH_UkWpV4mPhe4i5Kv084AuBTdoHLDjcLZgfSzrVH3_PsN6cRwlE1PDTxYCEJOmEu8eqbSl_fqDOlWJibMdegxi2gmfqtJ3Q&usqp=CAc" },
+  { name: "White Gold Engagement Ring", category: "Diamond", price: 120000, image: "https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/15549gisu1/diamond/diamond-Brillant_AAA/stone2/diamond-Brillant_AAA/stone3/diamond-Brillant_AAA/alloycolour/white.jpg" },
+  { name: "Sterling Silver Chain Necklace", category: "Silver", price: 9000, image: "https://m.media-amazon.com/images/I/81dBnuUtD7L._AC_UY300_.jpg" },
+  { name: "Rose Gold Heart Pendant", category: "Gold", price: 15000, image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQ3ij2QruTRhPcAyHZm5NVX2y4n6TGYiFQExmcnaNYv1IGQl7hLbP3fIvuHTTMwrwUrcuh_A0lUfNz1UotZmSv3djKKdun4iNDd_Tii7C77tdObHrse_xWherYd4ivH97sEluLq-g&usqp=CAc" },
+  { name: "Diamond Halo Ring", category: "Diamond", price: 110000, image: "https://bellandbrunt.com.au/wp-content/uploads/2024/02/oval-halo-ring.jpg" },
+  { name: "Sri Lankan Kandyan Bridal Necklace set", category: "Ethnic", price: 7000, image: "https://static-01.daraz.lk/original/c14d9e4aa46e9e349b93b976025448e1.jpg" },
+  { name: "Sri Lankan Temple Earrings", category: "Ethnic", price: 3500, image: "https://goldenleafjewels.com/cdn/shop/files/GL--_JK0103_-_290.png?v=1755974967" },
+  { name: "Nepalese Ethnic Coral Necklace", category: "Ethnic", price: 5200, image: "https://i.etsystatic.com/21679303/r/il/b2cc9a/3377465945/il_570xN.3377465945_8b17.jpg" },
+  { name: "Nepalese Handmade Ethnic Bracelet", category: "Ethnic", price: 2600, image: "https://s.alicdn.com/@sc04/kf/H43f151a299044e0cbd4a242d34989947e/Orginal-Design-Retro-Tibetan-style-Leather-Cord-Wrist-Jewelry-Handmade-Ethnic-Nepali-Copper-Beads-Charm-Bracelet-for-Men-Women.jpg" },
+  { name: "Colombian Emerald Necklace", category: "Gemstone", price: 85000, image: "https://i.etsystatic.com/17340238/r/il/a11648/3758834167/il_570xN.3758834167_m37m.jpg" },
+  { name: "Colombian Emerald Ring", category: "Gemstone", price: 78000, image: "https://m.media-amazon.com/images/I/41fZYYoUYdL._AC_UY1100_.jpg" },
+  { name: "Bar Pendant Necklace", category: "Modern", price: 13000, image: "https://mesmerizeindia.com/cdn/shop/files/PyritebarNaturalStoneNecklace_1.jpg?v=1766656007&width=2048" },
+  { name: "Diamond Stud Earrings", category: "Diamond", price: 60000, image: "https://4cs.gia.edu/wp-content/uploads/2018/05/229678-990x500-diamond-stud-earrings.jpg" },
+  { name: "Thai Ethnic Silver Charm Necklace", category: "Ethnic", price: 4500, image: "https://i.etsystatic.com/53831470/r/il/a4cd90/6570452351/il_fullxfull.6570452351_7abs.jpg" },
+  { name: "Thai Tribal Pattern Earrings", category: "Ethnic", price: 3000, image: "https://www.voylla.com/cdn/shop/products/VMJAI25328_02_3ee21605-cf52-454c-b3fe-f74a3275be14.jpg?v=1701775652" },
+  { name: "Indonesian Batik Style Necklace", category: "Ethnic", price: 4000, image: "https://eightyeightjewelry.com/wp-content/uploads/2019/10/IMG_2116-300x450.jpg" },
+  { name: "Indonesian Temple Earrings", category: "Ethnic", price: 3200, image: "https://ishhaara.com/cdn/shop/files/ishhaara-enamel-gopuram-shaped-jhumka-92725641534507.jpg?v=1774505991&width=533" },
+  { name: "Moroccan Ethnic Statement Necklace", category: "Ethnic", price: 6000, image: "https://i.etsystatic.com/7128480/r/il/64b330/728846392/il_570xN.728846392_7ho1.jpg" },
+  { name: "Moroccan Tribal Coin Earrings", category: "Ethnic", price: 2800, image: "https://i.etsystatic.com/7128480/r/il/eff08e/695946837/il_570xN.695946837_46uu.jpg" },
+  { name: "Ethiopian Tribal Beaded Necklace", category: "Ethnic", price: 3500, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoZAIvFfdjV1el3EIIZGWxn8wEkzled25EIA&s" },
+  { name: "Ethiopian Cross Pendant Jewelry", category: "Ethnic", price: 4000, image: "https://images-cdn.ubuy.co.in/694f45c2dea00bdbd108ec3c-ethiopian-gold-cross-pendant-necklace.jpg" },
+  { name: "Mexican Folk Art Beaded Necklace", category: "Ethnic", price: 3000, image: "https://i.etsystatic.com/13118787/r/il/b6339d/2623864444/il_570xN.2623864444_akai.jpg" },
+  { name: "Mexican Colorful Fiesta Earrings", category: "Ethnic", price: 2500, image: "https://i.etsystatic.com/33709313/r/il/d51b6d/4661809300/il_570xN.4661809300_7lhs.jpg" },
+  { name: "Uzbek Silk Thread Necklace", category: "Ethnic", price: 3200, image: "https://i.etsystatic.com/15703488/r/il/a882c5/2368893689/il_1080xN.2368893689_rl58.jpg" },
+  { name: "Uzbek Traditional Coin Jewelry", category: "Ethnic", price: 3800, image: "https://i.etsystatic.com/7773810/r/il/98edff/7665137284/il_300x300.7665137284_217s.jpg" },
+  { name: "Minimal Twist Ring", category: "Modern", price: 4100, image: "https://i.etsystatic.com/5415062/r/il/e49986/5307051930/il_570xN.5307051930_gbm1.jpg" },
+  { name: "Sri Lankan Blue Sapphire Ring", category: "Gemstone", price: 95000, image: "https://i.etsystatic.com/15171520/r/il/09a3ae/3721902156/il_570xN.3721902156_5huz.jpg" },
+  { name: "Indian Minimal Gold Chain", category: "Minimal", price: 9000, image: "https://i.etsystatic.com/6221024/r/il/f62755/3766190754/il_570xN.3766190754_7zbb.jpg" },
+  { name: "Indian Simple Nose Pin", category: "Minimal", price: 2000, image: "https://tribalornaments.com/cdn/shop/products/tribal-ornaments-default-title-5-mm-18k-gold-nose-pin-india-white-stone-simple-design-best-price-nose-ring-piercing-stud-21018853769369.jpg?v=1768682751&width=1445" },
+  { name: "Sri Lankan Sapphire Pendant", category: "Gemstone", price: 72000, image: "https://i.etsystatic.com/12205838/r/il/2737ce/7220291615/il_570xN.7220291615_cx4q.jpg" },
+  { name: "Sri Lankan Sapphire Earrings", category: "Gemstone", price: 68000, image: "https://i.etsystatic.com/51350412/r/il/cf334e/5968350171/il_570xN.5968350171_ato6.jpg" },
+  { name: "Scandinavian Minimal Necklace", category: "Modern", price: 5500, image: "https://i.etsystatic.com/62411200/r/il/ecaec7/7333799719/il_fullxfull.7333799719_9fov.jpg" },
+  { name: "Contemporary Sterling Ring", category: "Modern", price: 4500, image: "https://i.etsystatic.com/25366522/r/il/798501/6102530488/il_570xN.6102530488_sfu7.jpg" },
+  { name: "Abstract Minimal Bracelet", category: "Modern", price: 5200, image: "https://s.alicdn.com/@sc04/kf/Hfaead18409d24687ae38618559c8ba5du.jpg" },
+  { name: "Italian Designer Diamond Drop Earrings", category: "Diamond", price: 87000, image: "https://i.etsystatic.com/18395709/r/il/32ec20/3366878998/il_570xN.3366878998_n51f.jpg" },
+  { name: "French Elegant Thin Gold Bracelet", category: "Minimal", price: 11000, image: "https://i.ebayimg.com/images/g/HvQAAOSwwjJnj8oV/s-l1200.jpg" },
+  { name: "French Minimal Pearl Drop Earrings", category: "Minimal", price: 9500, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVX_yLAJebbwaudLsJ7aGSQa9mDbywz-tr6g&s" },
+  { name: "French Vintage Diamond Locket Pendant", category: "Diamond", price: 92000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuXFf9hbGNcmKkZcaMMsB87SqzYnNv_dU1mw&s" },
+  { name: "Modern Geometric Earrings", category: "Modern", price: 3800, image: "https://i.etsystatic.com/14852915/r/il/6fd783/3035366876/il_570xN.3035366876_stag.jpg" },
+  { name: "Brazilian Amethyst Pendant", category: "Gemstone", price: 22000, image: "https://i.etsystatic.com/18157938/r/il/36b6a7/5871732464/il_570xN.5871732464_52er.jpg" },
+  { name: "Brazilian Amethyst Ring", category: "Gemstone", price: 18000, image: "https://i.etsystatic.com/15532981/r/il/7e69ed/4645981161/il_570xN.4645981161_2hrn.jpg" },
+  { name: "Brazilian Amethyst Bracelet", category: "Gemstone", price: 25000, image: "https://i.etsystatic.com/10828790/r/il/48b44b/3520104245/il_570xN.3520104245_1e6u.jpg" },
+  { name: "African Ruby Bracelet", category: "Gemstone", price: 40000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0tgKkBJMequQee79nmPundIKfGLYENbfBwQ&s" },
+  { name: "African Ruby Necklace", category: "Gemstone", price: 52000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr3F9eyQgXNkGHoRORvY0XrLeLjfbf2AOnyg&s" },
+  { name: "American Sterling Silver Chain Necklace", category: "Silver", price: 9000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8w0t0dJ6fo26oX0zlXb-GaUZb_Nfz9-YnDA&s" },
+  { name: "American Minimal Silver Ring", category: "Silver", price: 4500, image: "https://i.etsystatic.com/9585373/r/il/dbe147/3681723863/il_570xN.3681723863_k0vj.jpg" },
+  { name: "Italian Designer Silver Bracelet", category: "Silver", price: 12000, image: "https://static.wixstatic.com/media/b2ac45_95048549c4f944a588ef6fdda1423844~mv2.jpg/v1/fit/w_500,h_500,q_90/file.jpg" },
+  { name: "Italian Polished Silver Chain", category: "Silver", price: 8000, image: "https://i.etsystatic.com/5341770/r/il/4773f8/6748550007/il_1080xN.6748550007_hmij.jpg" },
+  { name: "Indian Oxidized Silver Jhumka", category: "Silver", price: 3500, image: "https://i.etsystatic.com/24534712/r/il/4da311/6463826722/il_570xN.6463826722_be50.jpg" },
+  { name: "Indian Traditional Silver Anklet", category: "Silver", price: 5000, image: "https://i.etsystatic.com/29840896/r/il/786f08/5753197972/il_570xN.5753197972_8kly.jpg" },
+  { name: "Mexican Taxco Silver Bracelet", category: "Silver", price: 11000, image: "https://i.etsystatic.com/13806728/r/il/3154e7/1770706791/il_570xN.1770706791_c74a.jpg" },
+  { name: "Mexican Handcrafted Silver Ring", category: "Silver", price: 7000, image: "https://i.etsystatic.com/9633057/r/il/7ab0ea/6901745730/il_fullxfull.6901745730_eoyk.jpg" },
+  { name: "Thai Artisan Silver Necklace", category: "Silver", price: 9500, image: "https://i.etsystatic.com/14999067/r/il/55983c/7554238368/il_570xN.7554238368_k2mo.jpg" },
+  { name: "African Ruby Ring", category: "Gemstone", price: 36000, image: "https://i.etsystatic.com/45022275/r/il/6f1c35/6022153410/il_570xN.6022153410_bgd8.jpg" },
+  { name: "Australian Opal Earrings", category: "Gemstone", price: 30000, image: "https://i.etsystatic.com/27621950/r/il/a9ad37/6520537090/il_570xN.6520537090_gubq.jpg" },
+  { name: "Australian Opal Necklace", category: "Gemstone", price: 42000, image: "https://i.etsystatic.com/6153402/r/il/96d537/660904494/il_570xN.660904494_3msa.jpg" },
+  { name: "Australian Cushion Cut Diamond Ring", category: "Diamond", price: 104000, image: "https://i.etsystatic.com/5242268/r/il/866f28/795817187/il_570xN.795817187_ad3v.jpg" },
+  { name: "Russian Lab-Grown Diamond Tennis Bracelet", category: "Diamond", price: 72000, image: "https://www.wondrdiamonds.com/cdn/shop/files/WBR0000297-WH-A_2048x2048.webp?v=1757483141" },
+  { name: "Japanese Minimal Diamond Bar Necklace", category: "Diamond", price: 68000, image: "https://i.etsystatic.com/24580126/r/il/edea9d/6640609081/il_570xN.6640609081_mob7.jpg" },
+  { name: "American Solitaire Diamond Ring", category: "Diamond", price: 125000, image: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSVow08f_PLJPMfYxhkPlpYmhyFAARtTDrzwBpg2xgEnAOxMEmZciXnTE67rU5wCtmAfVFe25yOkXuPdvFFUWKeEmRYMKQhQyDKPPCI1IVqbV_iCCrE1FXCWFdQJc-0LDTUgFpEA_c&usqp=CAc" },
+  { name: "Canadian Ice Cut Diamond Pendant", category: "Diamond", price: 138000, image: "https://files.jewelfeed.com/catalog/items/62e5569c-6c4e-4fbb-b1c1-65317f4e928d.jpg.350x350_q85_background.jpg" },
+  { name: "South African Raw Diamond Bracelet", category: "Diamond", price: 152000, image: "https://i.etsystatic.com/11028025/r/il/2e2159/764780396/il_570xN.764780396_ckvo.jpg" },
+  { name: "Belgian Precision Cut Diamond Ring", category: "Diamond", price: 118000, image: "https://belgiumdiamonds.be/wp-content/uploads/2024/02/18-1.jpg" },
+  { name: "Australian Opal Ring", category: "Gemstone", price: 35000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQv8v9Mqz7Qsh2QUqJHyN6umKfytPs3RCGIdw&s" },
+  { name: "Minimalist Bar Chain", category: "Modern", price: 4700, image: "https://i.etsystatic.com/21989767/r/il/348de1/2307855575/il_570xN.2307855575_da65.jpg" },
+  { name: "Indian Ruby Ring", category: "Gemstone", price: 18000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm95VcQXebeVt-phjwpyNBazpAXy1tWuQvCw&s" },
+  { name: "Indian Pearl Necklace", category: "Pearl", price: 15000, image: "https://image-cdn.ubuy.com/jewar-indian-pearl-necklace-long-set/400_400_100/6813e522a5fb3d113b022507.jpg" },
+  { name: "Temple Pearl Earrings", category: "Pearl", price: 9000, image: "https://www.sarafrsjewellery.com/cdn/shop/files/2023-10-1811-28-30_CVDS_4060.jpg?v=1751006131&width=1200" },
+  { name: "Pearl Rajput Bracelet", category: "Pearl", price: 12000, image: "https://i.etsystatic.com/18886644/r/il/53bad1/4914104594/il_570xN.4914104594_qgy1.jpg" },
+  { name: "Thai Engraved Silver Bangle", category: "Silver", price: 8700, image: "https://i.etsystatic.com/23399058/c/2176/2176/4/0/il/2a0f1a/6163775509/il_300x300.6163775509_kx89.jpg" },
+  { name: "Italian Fine Chain Layer Necklace", category: "Minimal", price: 10500, image: "https://i.etsystatic.com/24647436/r/il/faf67e/6619698993/il_fullxfull.6619698993_a3l4.jpg" },
+  { name: "Italian Minimal Hoop Earrings", category: "Minimal", price: 8000, image: "https://i.etsystatic.com/7527461/r/il/2774bc/5962397710/il_fullxfull.5962397710_pps0.jpg" },
+  { name: "Platinum Solitaire Engagement Ring", category: "Platinum", price: 150000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAuAJfjHDu_9JM6pTFONufE5FJY0M0hYEoqA&s" },
+  { name: "Platinum Classic Wedding Band", category: "Platinum", price: 95000, image: "https://i.etsystatic.com/7267337/r/il/d92902/2591355649/il_570xN.2591355649_34d8.jpg" },
+  { name: "Platinum Diamond Tennis Bracelet", category: "Platinum", price: 180000, image: "https://i.etsystatic.com/18023297/r/il/445320/5555813693/il_570xN.5555813693_rx6p.jpg" },
+  { name: "Platinum Halo Diamond Pendant", category: "Platinum", price: 120000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCUba7RuWA4Dn_ZwB0lHUyqJWwPpTUBa4e9A&s" },
+  { name: "Platinum Minimal Bar Necklace", category: "Platinum", price: 70000, image: "https://i.etsystatic.com/50664501/r/il/f157cb/7454974714/il_300x300.7454974714_nv28.jpg" },
+  { name: "Platinum Geometric Stud Earrings", category: "Platinum", price: 60000, image: "https://i.etsystatic.com/33881142/r/il/eaf3c0/6595609237/il_570xN.6595609237_mx9d.jpg" },
+  { name: "Emerald Peacock Pendant", category: "Gemstone", price: 27000, image: "https://i.etsystatic.com/26263655/r/il/f1249f/6764870850/il_570xN.6764870850_rlhf.jpg" },
+  { name: "British Crown Jewel Inspired Necklace", category: "Luxury", price: 260000, image: "https://images.squarespace-cdn.com/content/v1/5f8062e0bb56c84e2e0deb7f/7f6d45a6-e7b0-4035-ad69-f5b3d9a66dbd/IMG_8260.JPEG" },
+  { name: "British Elite Sapphire Ring", category: "Luxury", price: 210000, image: "https://i.etsystatic.com/6558594/r/il/9dd089/837957406/il_570xN.837957406_4gyj.jpg" },
+  { name: "Swiss Precision Diamond Bracelet", category: "Luxury", price: 230000, image: "https://m.media-amazon.com/images/I/71BSLOrqJyL._AC_UY1100_.jpg" },
+  { name: "Swiss Luxury White Gold Pendant", category: "Luxury", price: 170000, image: "https://maioradiamonds.in/cdn/shop/files/MD-PSP00508rose_800x.jpg?v=1774509498" },
+  { name: "Saudi Royal Gold Necklace", category: "Luxury", price: 290000, image: "https://i.etsystatic.com/48261599/r/il/5e1ee1/5666261155/il_570xN.5666261155_tmie.jpg" },
+  { name: "Saudi Diamond Heritage Ring", category: "Luxury", price: 200000, image: "https://cdn11.bigcommerce.com/s-igqk382kzx/products/4878/images/107366/KR607863-1__53706.1764848016.386.513.jpg?c=1" },
+  { name: "Polki Navratna Bracelet", category: "Gemstone", price: 32000, image: "https://anairaa.in/cdn/shop/files/IMG-5021_dbb6185a-13a0-4a9b-a34d-710b62286fd1.png?v=1746776009" },
+  { name: "South Indian Bridal Necklace", category: "Bridal", price: 75000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkeo8tzXCC3Qj_y0vs3yi6whuMiTp93SZncA&s" },
+  { name: "Bridal Polki Earrings", category: "Bridal", price: 35000, image: "https://i.etsystatic.com/19653725/r/il/d73300/2293632260/il_570xN.2293632260_tqbh.jpg" },
+  { name: "Bridal Kundan Choker", category: "Bridal", price: 68000, image: "https://www.kattam.in/cdn/shop/files/premium-kemp-with-kundan-stone-bridal-grand-ball-choker-set-902427.jpg?v=1715325612" },
+  { name: "Korean Minimal Ring", category: "Modern", price: 4000, image: "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQnxQbKEriD2GcBE0hSC8bw0UclDRH87QzSPzb3X0w3F0Ql3p1uQrWlFi319r8jo0kZXx0C8YrIHbBj3VNdEV7uYtfea4ZWF8Cj6EoPn75z8j2Sy0Oby-WENOJDfd3PLX3uqGMAsCrL9Q&usqp=CAc" },
+  { name: "African Beaded Necklace", category: "Traditional", price: 3000, image: "https://nakasadesigns.com/wp-content/uploads/2018/07/IMG_1692.jpg" },
+  { name: "Infinity Gold Bracelet", category: "Gold", price: 22000, image: "https://carltonlondon.co.in/cdn/shop/files/b523716b_4.jpg?v=1756969383&width=1500" },
+  { name: "Minimalist Silver Ring", category: "Modern", price: 4500, image: "https://nipura.in/cdn/shop/files/NEW-NRWW00200060_1_94759496-6a30-4d57-8aeb-9863544cb39d.jpg?v=1756983766" },
+  { name: "Geometric Gold Earrings", category: "Modern", price: 12000, image: "https://i.etsystatic.com/13414556/r/il/064039/1838516514/il_570xN.1838516514_gjv3.jpg" },
+  { name: "Classic Hoop Earrings", category: "Gold", price: 14000, image: "https://kerajewels.com/cdn/shop/files/D9F9F47D-B8B6-4F08-81D5-B846980E5E56.jpg?v=1711890610&width=1946" },
+  { name: "Luxury Tennis Bracelet", category: "Luxury", price: 95000, image: "https://images-static.nykaa.com/media/catalog/product/9/0/902a290ycfjbr-031b32-sl_1.jpg?tr=w-500" },
+  { name: "Pearl Drop Earrings", category: "Pearl", price: 18000, image: "https://i.etsystatic.com/14859358/r/il/58ffe3/6629030549/il_570xN.6629030549_in11.jpg" },
+  { name: "Gold Meenakari Earrings", category: "Gold", price: 14000, image: "https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dw3d33abe2/images/hi-res/512018DMKABB00_1.jpg?sw=640&sh=640" },
+  { name: "Platinum Wedding Band", category: "Platinum", price: 70000, image: "https://i.etsystatic.com/5455502/r/il/e6c11d/5164961772/il_570xN.5164961772_n49t.jpg" },
+  { name: "Temple Bridal Kundan Set", category: "Bridal", price: 95000, image: "https://i.etsystatic.com/39645855/r/il/3390c0/6234780497/il_570xN.6234780497_9w5a.jpg" },
+  { name: "Gold Traditional Vaddanam", category: "Gold", price: 85000, image: "https://i.etsystatic.com/28990845/r/il/0d3754/6864197461/il_fullxfull.6864197461_5x5b.jpg" },
+  { name: "French Luxury Bracelet", category: "Luxury", price: 45000, image: "https://i.etsystatic.com/40354534/r/il/376d17/6089554444/il_570xN.6089554444_tnr1.jpg" },
+  { name: "Canadian Minimal Silver Leaf Pendant", category: "Minimal", price: 6000, image: "https://i.etsystatic.com/10027749/r/il/a68c33/3102097679/il_570xN.3102097679_6mve.jpg" },
+  { name: "Canadian Simple Chain Bracelet", category: "Minimal", price: 5500, image: "https://i.etsystatic.com/21729963/r/il/b9c81c/3469018002/il_570xN.3469018002_6dz4.jpg" },
+  { name: "French Vintage Cameo Brooch", category: "Traditional", price: 18000, image: "https://i.etsystatic.com/21005851/r/il/ea55a9/5020939380/il_570xN.5020939380_65i3.jpg" },
+  { name: "French Antique Pearl Choker", category: "Traditional", price: 26000, image: "https://img.kwcdn.com/product/fancy/365fc845-12ad-4165-9ef2-c7b72335cf61.jpg?imageMogr2/auto-orient%7CimageView2/2/w/800/q/70/format/webp" },
+  { name: "German Bavarian Silver Pendant", category: "Traditional", price: 14000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ65QylPJkgkB6zSh5ls9As0DYE0xsONMK37Q&s" },
+  { name: "German Heritage Charm Bracelet", category: "Traditional", price: 16000, image: "https://i.etsystatic.com/7826169/r/il/7c89ff/616905186/il_300x300.616905186_psut.jpg" },
+  { name: "Brazilian Tribal Beaded Necklace", category: "Traditional", price: 12000, image: "https://i.etsystatic.com/28830613/r/il/4a35dc/3052833279/il_570xN.3052833279_hf2t.jpg" },
+  { name: "Brazilian Carnival Gold Earrings", category: "Traditional", price: 15000, image: "https://i.etsystatic.com/12440885/r/il/dd23b9/3590349252/il_300x300.3590349252_l80f.jpg" },
+  { name: "Canadian Indigenous Beaded Bracelet", category: "Traditional", price: 11000, image: "https://i.etsystatic.com/16754631/r/il/9d7d43/3872014791/il_fullxfull.3872014791_g4ho.jpg" },
+  { name: "Canadian Maple Leaf Silver Pendant", category: "Traditional", price: 13000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeDiIe4PiN1DGvyWqsYeO4RFd4ob-PjgFp_w&s" },
+  { name: "Peruvian Inca Stone Necklace", category: "Traditional", price: 17000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTF7Vhw2doh0PWCEmZNOanEMwKXy-MBYAm1uQ&s" },
+  { name: "Peruvian Alpaca Silver Earrings", category: "Traditional", price: 9000, image: "https://i.etsystatic.com/57771571/r/il/fc8646/6713065105/il_300x300.6713065105_fw7n.jpg" },
+  { name: "Indonesian Balinese Gold Bracelet", category: "Traditional", price: 20000, image: "https://i.etsystatic.com/10387280/r/il/3962b6/3476458152/il_570xN.3476458152_9k13.jpg" },
+  { name: "Indonesian Temple Carved Pendant", category: "Traditional", price: 14000, image: "https://i.etsystatic.com/22940047/r/il/d7301a/5952321070/il_570xN.5952321070_86pm.jpg" },
+  { name: "Filipino Tribal Shell Necklace", category: "Traditional", price: 8000, image: "https://i.etsystatic.com/9882576/r/il/21136e/828275265/il_fullxfull.828275265_566a.jpg" },
+  { name: "Filipino Gold Heritage Earrings", category: "Traditional", price: 15000, image: "https://i.etsystatic.com/51974082/r/il/180703/7677971935/il_500x500.7677971935_15cl.jpg" },
+  { name: "Vietnamese Jade Luck Pendant", category: "Traditional", price: 10000, image: "https://i.etsystatic.com/37713117/r/il/a730e6/6930991168/il_fullxfull.6930991168_1g4p.jpg" },
+  { name: "Vietnamese Dragon Silver Bracelet", category: "Traditional", price: 12000, image: "https://i.etsystatic.com/12707804/r/il/c4e43f/4390193907/il_fullxfull.4390193907_kpd6.jpg" },
+  { name: "Moroccan Berber Silver Necklace", category: "Traditional", price: 21000, image: "https://i.etsystatic.com/12068246/r/il/5030f2/2145922821/il_570xN.2145922821_djcz.jpg" },
+  { name: "Moroccan Handcrafted Tribal Ring", category: "Traditional", price: 9000, image: "https://i.etsystatic.com/35294601/r/il/a204a3/7777823760/il_300x300.7777823760_c1wd.jpg" },
+  { name: "Kenyan Maasai Beaded Necklace", category: "Traditional", price: 11000, image: "https://i.etsystatic.com/9089285/r/il/48d404/5741353193/il_570xN.5741353193_r3bj.jpg" },
+  { name: "South African Rare Diamond Necklace", category: "Luxury", price: 270000, image: "https://diamondsbymanee.com/skin/frontend/manee/default/images/maneelife/pinkdiamond.png" },
+  { name: "South African Platinum Elite Ring", category: "Luxury", price: 210000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSICk9EzUqCBOtCBREX5aL9NorUpkCAZYD7Ig&s" },
+  { name: "Australian Opal Diamond Luxury Pendant", category: "Luxury", price: 180000, image: "https://i.etsystatic.com/11452756/r/il/650a7c/4805748303/il_570xN.4805748303_8vuk.jpg" },
+  { name: "Australian Designer Gold Bracelet", category: "Luxury", price: 160000, image: "https://jewelemarket.com/cdn/shop/files/104_2717-G_BRASLET_5.jpg?v=1774333351" },
+  { name: "Kenyan Tribal Color Bracelet", category: "Traditional", price: 6000, image: "https://i.etsystatic.com/6171992/r/il/6efa5b/6400114087/il_fullxfull.6400114087_81en.jpg" },
+  { name: "Polish Amber Pendant Necklace", category: "Traditional", price: 19000, image: "https://i.etsystatic.com/11135969/r/il/05a276/7828915674/il_fullxfull.7828915674_r0ne.jpg" },
+  { name: "Polish Folk Pattern Earrings", category: "Traditional", price: 8000, image: "https://i.etsystatic.com/20873399/r/il/26ba76/7644924721/il_570xN.7644924721_1h6f.jpg" },
+  { name: "Ukrainian Vyshyvanka Beaded Necklace", category: "Traditional", price: 13000, image: "https://i.etsystatic.com/16436157/r/il/6ed9ff/4253567051/il_570xN.4253567051_mjii.jpg" },
+  { name: "Ukrainian Folk Charm Bracelet", category: "Traditional", price: 9000, image: "https://i.etsystatic.com/50160279/r/il/b11f8d/5731545696/il_300x300.5731545696_hnb5.jpg" },
+  { name: "Nepalese Tibetan Silver Pendant", category: "Traditional", price: 15000, image: "https://i.etsystatic.com/25209277/r/il/b64633/6475241960/il_570xN.6475241960_kqms.jpg" },
+  { name: "Nepalese Handmade Prayer Beads", category: "Traditional", price: 7000, image: "https://i.etsystatic.com/18024056/r/il/d5245f/2549422980/il_570xN.2549422980_hx0k.jpg" },
+  { name: "Japanese Pearl Set", category: "Pearl", price: 20000, image: "https://m.media-amazon.com/images/I/61qaXDs2xjL._AC_UY1100_.jpg" },
+  { name: "Charm Bracelet Set", category: "Traditional", price: 16000, image: "https://i.etsystatic.com/11006758/r/il/e8bc69/6733094137/il_fullxfull.6733094137_tprk.jpg" },
+  { name: "Infinity Gold Bracelet", category: "Gold", price: 22000, image: "https://www.pngjewellers.com/cdn/shop/files/GLB29766_C_4ee41303-82d2-4cf0-94f5-95b48f582f33.jpg?v=1772815955" },
+  { name: "Minimalist Silver Ring", category: "Modern", price: 4500, image: "https://www.vervejewels.com/cdn/shop/products/Silver-Engagement-Rings-Minimalist-925-Silver-Engagement-Ring.jpg?v=1756449198" },
+  { name: "Luxury Tennis Bracelet", category: "Luxury", price: 95000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1T-BYBoU5Yr_nuKMlKtdKKy2h7GNg038qwg&s" },
+  { name: "Platinum Wedding Band", category: "Platinum", price: 70000, image: "https://i.etsystatic.com/5455502/r/il/e6c11d/5164961772/il_570xN.5164961772_n49t.jpg" },
+];
+
+/* NAVBAR */
+function Navbar({ setSearch, wishlist }) {
+  return (
+    <div className="navbar">
+      <h2> EliteFinds</h2>
+      <div className="nav-links">
+        <span>Home</span>
+        <span>Shop</span>
+        <span>Orders</span>
+        <span> Wishlist {wishlist.length} </span>
+      </div>
+      <div className="search-box">
+        <input placeholder="Search..." onChange={e => setSearch(e.target.value)} />
+      </div>
+    </div>
+  );
+}
+
+/* CATEGORIES */
+function Categories({ setCategory }) {
+  return (
+    <div className="categories">
+      {categories.map(c => (
+        <div key={c} className="category" onClick={()=>setCategory(c)}>
+          {c}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* PRODUCTS */
+function Products({ search, category, addToCart, addWishlist }) {
+  const filtered = products.filter(p =>
+    (category==="All" || p.category===category) &&
+    p.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div className="products">
+      <div className="grid">
+        {filtered.map((p,i) => (
+          <div key={i} className="card">
+            <div>
+              <img src={p.image} alt={p.name} />
+              <h3>{p.name}</h3>
+              <p>{p.category}</p>
+              <p>₹{p.price.toLocaleString()}</p>
+            </div>
+            <div className="btn-group">
+              <button className="add" onClick={()=>addToCart(p)}>Add to Cart</button>
+              <button className="wish" onClick={()=>addWishlist(p)}>Wishlist</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ORDER CONFIRMATION PAGE */
+function OrderConfirmation({ cart, total, onBackToShop }) {
+  const orderId = "EF" + Math.floor(100000 + Math.random() * 900000);
+  const deliveryDate = new Date();
+  deliveryDate.setDate(deliveryDate.getDate() + 5);
+  const dateStr = deliveryDate.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+
+  return (
+    <div className="order-page">
+      <div className="navbar">
+        <h2> EliteFinds</h2>
+        <div className="nav-links"><span>Home</span><span>Shop</span><span>Orders</span></div>
+      </div>
+      <div className="order-confirm-container">
+        <div className="order-confirm-header">
+          <div className="checkmark">✓</div>
+          <h2>Order Placed Successfully!</h2>
+          <p>Thank you for shopping with EliteFinds</p>
+          <div className="order-id-badge">ORDER #{orderId}</div>
+        </div>
+
+        <div className="order-confirm-body">
+          <p className="order-section-title">Items Ordered ({cart.length})</p>
+          <div className="order-items-list">
+            {cart.map((item, i) => (
+              <div key={i} className="order-item-row">
+                <img src={item.image} alt={item.name} />
+                <div className="order-item-info">
+                  <p className="item-name">{item.name}</p>
+                  <p className="item-cat">{item.category}</p>
+                </div>
+                <span className="order-item-price">₹{item.price.toLocaleString()}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="order-total-row">
+            <span className="label">Total Paid</span>
+            <span className="amount">₹{total.toLocaleString()}</span>
+          </div>
+
+          <div className="order-info-grid">
+            <div className="order-info-card">
+              <p className="info-label">Payment Method</p>
+              <p className="info-value">💳 Cash on Delivery</p>
+            </div>
+            <div className="order-info-card">
+              <p className="info-label">Expected Delivery</p>
+              <p className="info-value">📦 {dateStr}</p>
+            </div>
+            <div className="order-info-card">
+              <p className="info-label">Ship To</p>
+              <p className="info-value">📍 Chennai, India</p>
+            </div>
+            <div className="order-info-card">
+              <p className="info-label">Contact</p>
+              <p className="info-value">📞 +91 98765 43210</p>
+            </div>
+          </div>
+
+          <p className="order-section-title">Order Tracking</p>
+          <div className="order-track-steps">
+            <div className="track-step done">
+              <div className="step-dot">✓</div>
+              <span className="step-label">Confirmed</span>
+            </div>
+            <div className="track-step active">
+              <div className="step-dot">📦</div>
+              <span className="step-label">Processing</span>
+            </div>
+            <div className="track-step">
+              <div className="step-dot">🚚</div>
+              <span className="step-label">Shipped</span>
+            </div>
+            <div className="track-step">
+              <div className="step-dot">🏠</div>
+              <span className="step-label">Delivered</span>
+            </div>
+          </div>
+
+          <button className="order-back-btn" onClick={onBackToShop}>
+            ← Continue Shopping
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* APP */
+function App() {
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("All");
+  const [cart, setCart] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const [orderCart, setOrderCart] = useState([]);
+  const [orderTotal, setOrderTotal] = useState(0);
+
+  const addToCart = item => setCart([...cart, item]);
+  const addWishlist = item => setWishlist([...wishlist, item]);
+  const total = cart.reduce((sum, i) => sum + i.price, 0);
+
+  const handlePay = () => {
+    setOrderCart([...cart]);
+    setOrderTotal(total);
+    setCart([]);
+    setOrderPlaced(true);
+  };
+
+  const handleBackToShop = () => {
+    setOrderPlaced(false);
+  };
+
+  if (orderPlaced) {
+    return <OrderConfirmation cart={orderCart} total={orderTotal} onBackToShop={handleBackToShop} />;
+  }
+
+  return (
+    <>
+      <Navbar setSearch={setSearch} wishlist={wishlist} />
+      <div className="hero"><h1>Premium Jewelry Collection</h1></div>
+      <Categories setCategory={setCategory} />
+      <Products search={search} category={category} addToCart={addToCart} addWishlist={addWishlist} />
+
+      <div className="footer">
+        <div className="footer-info">
+          <div>
+            <h3>About Us</h3>
+            <p>Premium jewelry collections from around the world.</p>
+          </div>
+          <div>
+            <h3>Contact us on</h3>
+            <p> +91 98765 43210</p>
+            <p> support@elitefinds.com</p>
+            <p> WhatsApp: +91 98765 43210</p>
+          </div>
+          <div>
+            <p>🛒 {cart.length}</p>
+            <p>Total ₹{total.toLocaleString()}</p>
+          </div>
+        </div>
+      </div>
+
+      {cart.length > 0 && (
+        <button className="pay-fixed" onClick={handlePay}>
+          Pay ₹{total.toLocaleString()}
+        </button>
+      )}
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+
+<!-- ===== AI CHATBOT ===== -->
+<div id="chat-bot-icon" onclick="toggleChat()" title="Chat with EliteFinds AI">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.477 2 2 6.145 2 11.243c0 2.598 1.174 4.938 3.05 6.607L4 22l4.5-2.197A10.52 10.52 0 0012 20.486c5.523 0 10-4.144 10-9.243C22 6.145 17.523 2 12 2z" fill="gold"/>
+    <circle cx="8.5" cy="11.5" r="1.2" fill="#1a1a1a"/>
+    <circle cx="12" cy="11.5" r="1.2" fill="#1a1a1a"/>
+    <circle cx="15.5" cy="11.5" r="1.2" fill="#1a1a1a"/>
+  </svg>
+</div>
+
+<div id="chat-window">
+  <div id="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-avatar">💎</div>
+      <div class="chat-header-info">
+        <p class="chat-name">EliteFinds AI</p>
+        <p class="chat-status">Online now</p>
+      </div>
+    </div>
+    <button id="chat-close" onclick="toggleChat()">✕</button>
+  </div>
+  <div id="chat-messages"></div>
+  <div id="chat-input-area">
+    <input id="chat-input" placeholder="Ask me anything..." onkeydown="handleKey(event)" />
+    <button id="chat-send" onclick="sendMessage()">
+      <svg viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+let chatOpen = false;
+let chatHistory = [];
+let isTyping = false;
+
+const SYSTEM_PROMPT = `You are EliteFinds AI, a smart and friendly jewelry shopping assistant for EliteFinds — a premium online jewelry store. You help customers with:
+- Finding the right jewelry (rings, necklaces, earrings, bracelets, pendants, bangles)
+- Explaining categories: Gold, Diamond, Silver, Bridal, Platinum, Pearl, Gemstone, Modern, Traditional, Luxury, Ethnic, Minimal
+- Price guidance (products range from ₹1,500 to ₹3,00,000+)
+- Care tips for different types of jewelry
+- Occasion-based suggestions (weddings, festivals, daily wear, gifting)
+- Explaining gemstones, metals, and craftsmanship
+- Store info: contact +91 98765 43210, support@elitefinds.com, WhatsApp available
+- Delivery, returns, and order-related queries
+- Styling and fashion advice for jewelry
+
+Keep responses warm, helpful, concise (2-4 sentences unless more detail is needed), and use emojis occasionally. Always be enthusiastic about jewelry!`;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const win = document.getElementById('chat-window');
+  if (chatOpen) {
+    win.style.display = 'flex';
+    setTimeout(() => win.classList.add('open'), 10);
+    if (chatHistory.length === 0) {
+      setTimeout(() => {
+        addBotMessage("Hi there! 👋 I'm the EliteFinds AI assistant. How can I help you today?", [
+          "Browse categories", "Find a gift 🎁", "Bridal jewelry", "Care tips"
+        ]);
+      }, 400);
+    }
+  } else {
+    win.classList.remove('open');
+    setTimeout(() => { win.style.display = 'none'; }, 220);
+  }
+}
+
+function addUserMessage(text) {
+  const msgs = document.getElementById('chat-messages');
+  const el = document.createElement('div');
+  el.className = 'chat-msg user';
+  el.textContent = text;
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function addBotMessage(text, quickReplies) {
+  const msgs = document.getElementById('chat-messages');
+  const el = document.createElement('div');
+  el.className = 'chat-msg bot';
+  el.textContent = text;
+  msgs.appendChild(el);
+
+  if (quickReplies && quickReplies.length > 0) {
+    const qb = document.createElement('div');
+    qb.className = 'chat-quick-btns';
+    quickReplies.forEach(q => {
+      const btn = document.createElement('button');
+      btn.className = 'chat-quick-btn';
+      btn.textContent = q;
+      btn.onclick = () => {
+        qb.remove();
+        sendUserText(q);
+      };
+      qb.appendChild(btn);
+    });
+    msgs.appendChild(qb);
+  }
+
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const el = document.createElement('div');
+  el.className = 'chat-msg typing';
+  el.id = 'typing-indicator';
+  el.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+async function callClaudeAPI(userMessage) {
+  chatHistory.push({ role: "user", content: userMessage });
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: chatHistory
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.content && data.content[0] ? data.content[0].text : "Sorry, I couldn't get a response. Please try again!";
+    chatHistory.push({ role: "assistant", content: reply });
+    return reply;
+  } catch (err) {
+    return "Oops! Something went wrong. Please try again or contact us at support@elitefinds.com 💌";
+  }
+}
+
+async function sendUserText(text) {
+  if (!text.trim() || isTyping) return;
+  isTyping = true;
+  addUserMessage(text);
+  showTyping();
+
+  const reply = await callClaudeAPI(text);
+  removeTyping();
+
+  let quickReplies = [];
+  const lower = text.toLowerCase();
+  if (lower.includes("categor") || lower.includes("browse")) {
+    quickReplies = ["Gold jewelry", "Diamond pieces", "Bridal sets", "Minimal style"];
+  } else if (lower.includes("gift") || lower.includes("occasion")) {
+    quickReplies = ["Under ₹5,000", "Under ₹20,000", "Wedding gift", "Anniversary gift"];
+  } else if (lower.includes("bridal") || lower.includes("wedding")) {
+    quickReplies = ["Kundan sets", "Gold bridal", "Diamond bridal", "Traditional sets"];
+  }
+
+  addBotMessage(reply, quickReplies);
+  isTyping = false;
+}
+
+function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  sendUserText(text);
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter') sendMessage();
+}
+</script>
+
+</body>
+</html>
